@@ -43,10 +43,10 @@ class App extends Component {
 
   // handling "give fish" button click
   handleSetStateFish = () => {
-    // adding to "give fish" click count for future functionality
+    // adding to "give fish" click count
     const fishCount = this.state.fishClickCount + 1;
     this.setState({fishClickCount: fishCount});
-    // addint to points
+    // adding to points
     const pointsCount = this.state.points + 1;
     this.setState({points: pointsCount});
     // changing seal pic to eating fish
@@ -56,14 +56,17 @@ class App extends Component {
   // handling "give incremental fish" button click
   handleIncrementalFish = () => {
     // adding to "give fish" click count for future functionality
-    const fishCount = this.state.fishClickCount + 1;
-    this.setState({fishClickCount: fishCount});
-    // addint to points
-    const pointsCount = this.state.points + 1;
-    this.setState({points: pointsCount});
-    // changing seal pic to eating fish
-    this.setState({sealPic: sealJSON[2].sealFishPic});
+    setInterval(this.fishIncrement.bind(this), 2000);
   };
+
+  fishIncrement = () => {
+        // adding to "gif fish" click count 
+        const fishCount = this.state.fishClickCount + 1;
+        this.setState({fishClickCount: fishCount}); 
+        // adding to points
+        const pointsCount = this.state.points + 1;
+        this.setState({points: pointsCount});
+  }
 
   render() {
     return (
@@ -88,7 +91,6 @@ class App extends Component {
           onClick={this.handleSetStateNeutral}
         />
 
-
         <Button 
           name="GIVE FISH"
           id="give-fish"
@@ -101,6 +103,13 @@ class App extends Component {
           class={this.state.fishClickCount > 10 ? "button" : "button hide"}
           id="give-fish-incrementally"
           onClick={this.handleIncrementalFish}
+        />
+
+        <Button 
+          name="PLEASE STOP GIVING FISH"
+          class={this.state.fishClickCount > 80 ? "button" : "button hide"}
+          id="stop-giving-fish"
+          onClick={this.handleStopFishIncrement}
         />
       </div>
     );
