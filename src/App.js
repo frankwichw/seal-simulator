@@ -53,6 +53,18 @@ class App extends Component {
     this.setState({sealPic: sealJSON[2].sealFishPic});
   };
 
+  // handling "give incremental fish" button click
+  handleIncrementalFish = () => {
+    // adding to "give fish" click count for future functionality
+    const fishCount = this.state.fishClickCount + 1;
+    this.setState({fishClickCount: fishCount});
+    // addint to points
+    const pointsCount = this.state.points + 1;
+    this.setState({points: pointsCount});
+    // changing seal pic to eating fish
+    this.setState({sealPic: sealJSON[2].sealFishPic});
+  };
+
   render() {
     return (
       <div className="container">
@@ -64,18 +76,31 @@ class App extends Component {
         </div>
         <Button 
           name="APROACH"
+          id="approach"
+          class="button"
           onClick={this.handleSetStateAngry}
         />
 
         <Button 
           name="BACK UP"
+          id="back-up"
+          class="button"
           onClick={this.handleSetStateNeutral}
         />
 
 
         <Button 
           name="GIVE FISH"
+          id="give-fish"
+          class="button"
           onClick={this.handleSetStateFish}
+        />
+
+        <Button 
+          name="GIVE FISH INCREMENTALLY"
+          class={this.state.fishClickCount > 10 ? "button" : "button hide"}
+          id="give-fish-incrementally"
+          onClick={this.handleIncrementalFish}
         />
       </div>
     );

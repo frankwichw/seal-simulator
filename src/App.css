@@ -21,3 +21,7 @@ body {
 .button {
   display: inline-block;
 }
+
+.hide {
+  display: none;
+}
